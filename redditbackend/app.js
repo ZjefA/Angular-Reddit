@@ -5,11 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ZjefA:<MP+5brg2>@reddit-shard-00-00-xtwt9.mongodb.net:27017,reddit-shard-00-01-xtwt9.mongodb.net:27017,reddit-shard-00-02-xtwt9.mongodb.net:27017/test?ssl=true&replicaSet=Reddit-shard-0&authSource=admin', {  useMongoClient: true });
-
-MongoClient.connect(uri, function(err, db) {
-  db.close();
-});
+mongoose.connect('mongodb://ZjefA:<MP+5brg2>@reddit-shard-00-00-xtwt9.mongodb.net:27017,reddit-shard-00-01-xtwt9.mongodb.net:27017,reddit-shard-00-02-xtwt9.mongodb.net:27017/test?ssl=true&replicaSet=Reddit-shard-0&authSource=admin', {  useMongoClient: true })
+  .then(() => console.log('connection successful'))
+  .catch((err) => console.error(err));
 
 var index = require('./routes/index');
 var users = require('./routes/users');
