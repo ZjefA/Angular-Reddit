@@ -16,7 +16,7 @@ import { CommentComponent } from './comment/comment.component';
     CommentComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
