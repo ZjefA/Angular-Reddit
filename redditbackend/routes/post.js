@@ -1,19 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Book = require('../models/post.js');
+var post = require('../models/Post.js');
 
 /* GET ALL POSTS */
 router.get('/', function(req, res, next) {
-  Book.find(function (err, products) {
+  post.find(function (err, posts) {
     if (err) return next(err);
-    res.json(products);
+    res.json(posts);
   });
 });
 
 /* GET SINGLE POST BY ID */
 router.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id, function (err, post) {
+  post.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -21,7 +21,7 @@ router.get('/:id', function(req, res, next) {
 
 /* SAVE POST */
 router.post('/', function(req, res, next) {
-  Book.create(req.body, function (err, post) {
+  post.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE POST */
 router.put('/:id', function(req, res, next) {
-  Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  post.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -37,7 +37,7 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE POST */
 router.delete('/:id', function(req, res, next) {
-  Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  post.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

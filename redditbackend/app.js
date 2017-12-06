@@ -4,13 +4,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ZjefA:<MP+5brg2>@reddit-shard-00-00-xtwt9.mongodb.net:27017,reddit-shard-00-01-xtwt9.mongodb.net:27017,reddit-shard-00-02-xtwt9.mongodb.net:27017/test?ssl=true&replicaSet=Reddit-shard-0&authSource=admin', {  useMongoClient: true })
-  .then(() => console.log('connection successful'))
-  .catch((err) => console.error(err));
+var uri = 'mongodb://ZjefA:MP+5brg2@reddit-shard-00-00-xtwt9.mongodb.net:27017,reddit-shard-00-01-xtwt9.mongodb.net:' +
+  '27017,reddit-shard-00-02-xtwt9.mongodb.net:27017/redditdb?ssl=true&replicaSet=Reddit-shard-0&authSource=admin';
+
+require('./models/Category');
+require('./models/Comment');
+require('./models/Post');
+require('./models/User');
+
+require('./config/passport');
+
+mongoose.connect(uri, {  useMongoClient: true }).then(() => {
+  console.log('connection successful');
+}).catch((err) => console.error(err));
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var comments = require('./routes/comment');
+var posts = require('./routes/post');
 
 var app = express();
 
@@ -25,9 +39,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/comments', comments);
+app.use('/posts', posts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,43 +1,43 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Book = require('../models/Book.js');
+var Comment = require('../models/Comment');
 
 /* GET ALL COMMENTS */
 router.get('/', function(req, res, next) {
-  Book.find(function (err, products) {
+  Comment.find(function (err, comments) {
     if (err) return next(err);
-    res.json(products);
+    res.json(comments);
   });
 });
 
 /* GET SINGLE COMMENT BY ID */
 router.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id, function (err, post) {
+  Comment.findById(req.params.id, function (err, comment) {
     if (err) return next(err);
-    res.json(post);
+    res.json(comment);
   });
 });
 
 /* SAVE COMMENT */
 router.post('/', function(req, res, next) {
-  Book.create(req.body, function (err, post) {
+  Comment.create(req.body, function (err, comment) {
     if (err) return next(err);
-    res.json(post);
+    res.json(comment);
   });
 });
 
 /* UPDATE COMMENT */
 router.put('/:id', function(req, res, next) {
-  Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Comment.findByIdAndUpdate(req.params.id, req.body, function (err, comment) {
     if (err) return next(err);
-    res.json(post);
+    res.json(comment);
   });
 });
 
 /* DELETE COMMENT */
 router.delete('/:id', function(req, res, next) {
-  Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Comment.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
