@@ -44,7 +44,7 @@ app.use(passport.initialize());
 app.use('/', index);
 app.use('/users', users);
 app.use('/comments', comments);
-app.use('/posts', posts);
+app.use('/post', posts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,6 +2,7 @@ import {Post} from './Post';
 import {User} from "./User";
 
 export class Category{
+  private _id: string;
   private _name: string;
   private _posts: Post[];
 
@@ -11,13 +12,14 @@ export class Category{
   }
 
   static fromJSON(json): Category {
-    const rec = new Category(json.name, json.posts);
-    rec._name = json._name;
+    const rec = new Category(json._name, json._posts);
+    rec._id = json._id;
     return rec;
   }
 
   toJSON() {
     return {
+      _id: this._id,
       name: this._name,
       posts: this._posts
     };
@@ -25,6 +27,10 @@ export class Category{
 
   addPost(titel: string, maker: User, inhoud: string) {
     this._posts.push(new Post(titel, maker, inhoud));
+  }
+
+  get id(): string {
+    return this._id;
   }
 
   get name(): string {
@@ -39,4 +45,7 @@ export class Category{
     return this._posts;
   }
 
+  static print(item: any | undefined) {
+    console.log(item);
+  }
 }

@@ -10,9 +10,9 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 
 const routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'login', component: LoginComponent},
+  { path: 'logout', component: LogoutComponent},
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
@@ -31,7 +31,7 @@ const routes = [
     AuthenticationService,
     AuthGuardService
   ],
-  exports: [
+  exports: [LoginComponent, RegisterComponent, LogoutComponent
   ]
 })
 export class UserModule { }

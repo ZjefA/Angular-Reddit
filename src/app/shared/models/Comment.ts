@@ -1,6 +1,7 @@
 import {User} from './User';
 
 export class Comment{
+  private _id: string;
   private _maker: User;
   private _inhoud: string;
   private _aantalUpvotes: number;
@@ -15,6 +16,21 @@ export class Comment{
 
   addComment(maker: User, inhoud: string){
     this._comments.push(new Comment(maker, inhoud));
+  }
+
+  static fromJSON(json): Comment {
+    const rec = new Comment(json.maker, json.inhoud, json.comments);
+    rec._id = json._id;
+    return rec;
+  }
+
+  toJSON() {
+    return {
+      _id: this._id,
+      maker: this._maker,
+      inhoud: this._maker,
+      comments: this._comments
+    };
   }
 
   get maker(): User {

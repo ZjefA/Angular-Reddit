@@ -1,7 +1,34 @@
+#wrapper {
+  overflow: hidden;
+}
+#sidebar-wrapper{
+  overflow-x: hidden;
+}
 .container-fluid {
   background-color: whitesmoke;
 }
 
 #page-content-wrapper {
   background-color: whitesmoke;
+}
+
+button {
+  margin-top: 15px;
+}
+
+#welcome {
+  color: white;
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+  margin: auto;
+  padding-top: 20px;
+}
+
+li p {
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  padding: 15px 0 5px 0;
 }
