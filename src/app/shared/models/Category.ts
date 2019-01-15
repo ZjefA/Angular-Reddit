@@ -12,7 +12,10 @@ export class Category{
   }
 
   static fromJSON(json): Category {
-    const rec = new Category(json._name, json._posts);
+    const rec = new Category(
+      json.name, 
+      json.posts.map(Post.fromJSON)
+      );
     rec._id = json._id;
     return rec;
   }

@@ -7,7 +7,7 @@ let Category = mongoose.model('Category');
 let auth = jwt({secret: process.env.REDDIT_BACKEND_SECRET, _userProperty: 'payload'});
 
 /* GET home page. (all categories)*/
-router.get('/categories', auth, function(req, res, next) {
+router.get('/API/categories/', /* auth, */ function(req, res, next) {
   let query = Category.find();
   query.exec(function (err, categories) {
     if(err){return next(err);}
@@ -15,8 +15,17 @@ router.get('/categories', auth, function(req, res, next) {
   });
 });
 
+/* POST new category */
+router.post('/API/categories/', function(req, res, next) {
+  let category = new Category({ name: req.body.name, posts: req.body.posts});
+  category.save(function(err, rec) {
+    if(err){return next(err)}
+    res.json(rec);
+  })
+});
+
 /* GET SINGLE CATEGORY BY ID */
-router.get('/categories/:id', function(req, res, next) {
+router.get('/API/categories/:id', function(req, res, next) {
   let query = Category.findById(req.params.id).populate('posts').populate('comments');
   query.exec(function (err, category) {
     if(err){return next(err);}

@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
-var uri = 'mongodb://ZjefA:MP+5brg2@reddit-shard-00-00-xtwt9.mongodb.net:27017,reddit-shard-00-01-xtwt9.mongodb.net:' +
-  '27017,reddit-shard-00-02-xtwt9.mongodb.net:27017/redditdb?ssl=true&replicaSet=Reddit-shard-0&authSource=admin';
 
 require('./models/Category');
 require('./models/Comment');
@@ -16,7 +14,7 @@ require('./models/User');
 
 require('./config/passport');
 
-mongoose.connect(uri, {  useMongoClient: true }).then(() => {
+mongoose.connect('mongodb://localhost/redditdb', {  useMongoClient: true }).then(() => {
   console.log('connection successful');
 }).catch((err) => console.error(err));
 
@@ -27,10 +25,6 @@ var comments = require('./routes/comment');
 var posts = require('./routes/post');
 
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -61,7 +55,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;

@@ -6,12 +6,12 @@
       <ng-template #loginlink>
         <button type="button" class="btn btn-info btn-lg center-block" routerLinkActive='active' routerLink="/login"><span class="glyphicon glyphicon-user"></span> Sign in</button>
       </ng-template>
-      <p id="welcome" *ngIf="(currentUser|async)" Style="visibility: hidden;" else Style="visibility: visible;">Hi {{currentUser|async}}</p>
+      <p id="welcome" *ngIf="(currentUser | async)" Style="visibility: hidden;" else Style="visibility: visible;">Hi {{currentUser | async}}</p>
       <button type="button" *ngIf='(currentUser | async) else loginlink' class="btn btn-info btn-lg center-block" routerLinkActive='active' routerLink="/logout">logout</button>
       <li class="sidebar-brand">
         <hr style="color: whitesmoke;">
-        <p *ngIf="(currentUser|async)" Style="visibility: hidden;" else Style="visibility: visible;">Your categories:</p>
-        <div *ngIf="(currentUser|async)" Style="visibility: hidden;" else Style="visibility: visible;">
+        <p *ngIf="(currentUser | async)" Style="visibility: hidden;" else Style="visibility: visible;">Your categories</p>
+        <div *ngIf="(currentUser | async)" Style="visibility: hidden;" else Style="visibility: visible;">
           <app-category-list></app-category-list>
         </div>
       </li>
